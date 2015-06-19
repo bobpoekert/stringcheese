@@ -26,7 +26,7 @@ The template language has two kinds if tag: `{% ... %}` and `{%* ... *%}`.
 
 Anything inside `{%` `%}` blocks gets interpreted as a clojure expression, and the results go in the output.
 
-Anything inside `{%*` `*}` blocks gets interpreted as metadata for the clojure function that this template represents. If the thing inside the brackets is a vector, it's interpreted as an arglist. If it's a string, it's interpreted as a docstring. If it's a map, it's interpreted as metadata. Anything else is an error.
+Anything inside `{%*` `*%}` blocks gets interpreted as metadata for the clojure function that this template represents. If the thing inside the brackets is a vector, it's interpreted as an arglist. If it's a string, it's interpreted as a docstring. If it's a map, it's interpreted as metadata. Anything else is an error.
 
 When you call `require-templates` and pass it a directory, it generates a clojure namespace for that directory with a funciton for each template file, whose name is the filename. This is why `{%* ... *%}` tags exist.
 
