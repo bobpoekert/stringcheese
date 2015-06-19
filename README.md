@@ -17,6 +17,10 @@ Stringcheese is a string template library for clojure. Libraries like [Hiccup](h
     email-templates
     "resources/email-templates/")
 
+(cheese/deftemplate results
+    [rows]
+    "<html><body><ul>{% (for [row rows] (format "<li>%s</li>" row)) %}</ul></body></html>")
+
 (cheese/render-string confirmation-email "Jane Doe" (java.util.Date.))
 
 (cheese/render-string email-templates/direct-message (User. 12345) (User. 56789) "howdy")
@@ -30,11 +34,10 @@ Anything inside `{%*` `*%}` blocks gets interpreted as metadata for the clojure 
 
 When you call `require-templates` and pass it a directory, it generates a clojure namespace for that directory with a funciton for each template file, whose name is the filename. This is why `{%* ... *%}` tags exist.
 
-An expression in a `{% ... %}` is expected to return one of three things:
+An expression in a `{% ... %}` is expected to return one of two things:
 
 * A string, or something that can be turned into a string (with `str`)
 * Something that implements java.util.List (this includes clojure sequences). In this case we iterate over the elements and write them out one by one.
-* Something that you can call `deref` on. When we hit one of these we evaluate the rest of the templtae in two passes. On the first pass we evaluate all the expressions, and on the second we deref everything that can be deref'd and write everythng out. This allows for fetching multiple data dependencies in parallel.
 
 ## License
 
