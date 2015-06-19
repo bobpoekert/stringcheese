@@ -19,7 +19,7 @@ The expression is expected to return one of three things:
 
 * A string, or something that can be turned into a string (with `str`)
 * Something that implements java.util.List (this includes clojure sequences). In this case we iterate over the elements and write them out one by one.
-* Somehting that you can call `deref` on. When we hit one of these we evaluate the rest of the templtae in two passes. On the first pass we evaluate all the expressions, and on the second we deref everything that can be deref'd and write everythng out. This allows for fetching multiple data dependencies in parallel.
+* Something that you can call `deref` on. When we hit one of these we evaluate the rest of the templtae in two passes. On the first pass we evaluate all the expressions, and on the second we deref everything that can be deref'd and write everythng out. This allows for fetching multiple data dependencies in parallel.
 
 ## License
 
