@@ -4,6 +4,8 @@ Stringcheese is a string template library for clojure. Libraries like [Hiccup](h
 
 ## Usage
 
+Add the following to your project.clj: `[stringcheese "1"]`
+
 ```clojure
 (require '[stringcheese.core :as cheese])
 
