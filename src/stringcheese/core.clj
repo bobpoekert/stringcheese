@@ -38,6 +38,15 @@
                   ~(read-string (apply str (map gen-expr-inside args)))
                   ~writer-sym)))
 
+(defmacro deftemplate
+  ([nom docstring arglist template]
+    (let [outp-sym (with-meta (gensym "outp") {:tag 'java.io.Writer})]
+      `(defn ~nom ~docstring
+        ~(into [outp-sym] arglist)
+        ~(inner-compile-template outp-sym (template-parser (eval template))))))
+  ([nom arglist template]
+    (deftemplate nom nil arglist template)))
+
 (defprotocol WriteValue
   (write-value! [v target]))
 
