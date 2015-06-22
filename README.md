@@ -15,12 +15,11 @@ Add the following to your project.clj: `[stringcheese "1"]`
     (slurp (clojure.java.io/resource "confirmation-email.html")))
 
 (cheese/deftemplate results
+    "A simple list"
     [rows]
     "<html><body><ul>{% (for [row rows] %{ <li> {% row %} </li> }%) %}</ul></body></html>")
 
 (cheese/render-string confirmation-email "Jane Doe" (java.util.Date.))
-
-(cheese/render-string email-templates/direct-message (User. 12345) (User. 56789) "howdy")
 ```
 
 The template language has two kinds if tag: `{% ... %}` and `%{ ... }%`.
@@ -32,7 +31,9 @@ An expression in a `{% ... %}` is expected to return one of two things:
 * A string, or something that can be turned into a string (with `str`)
 * Something that implements java.util.List (this includes clojure sequences). In this case we iterate over the elements and write them out one by one.
 
-`%{ ... }%` blocks go inside `{% ... %}` blocks and mode-switch back to literal mode. This allows you to embed sub-expressions that are themselves templates inside the expressions in your templates (like the `<li>` tag in the previous example).. 
+`%{ ... }%` blocks go inside `{% ... %}` blocks and mode-switch back to literal mode. This allows you to embed sub-expressions that are themselves templates inside the expressions in your templates (like the `<li>` tag in the previous example).
+
+`%{ ... }%` blocks return java Lists (currently ArrayLists) of strings to their parent expressions. For example `%{ something: {% (range 2) %} }%` evaluates to an ArrayList containing `[" something: " "0" "1"]`.
 
 ## License
 
