@@ -33,7 +33,9 @@ An expression in a `{% ... %}` is expected to return one of two things:
 
 `%{ ... }%` blocks go inside `{% ... %}` blocks and mode-switch back to literal mode. This allows you to embed sub-expressions that are themselves templates inside the expressions in your templates (like the `<li>` tag in the previous example).
 
-`%{ ... }%` blocks return java Lists (currently ArrayLists) of strings to their parent expressions. For example `%{ something: {% (range 2) %} }%` evaluates to an ArrayList containing `[" something: " "0" "1"]`.
+`%{ ... }%` blocks return java Lists (currently ArrayLists) of strings to their parent expressions. For example `%{ something: {% (range 2) %} }%` evaluates to an ArrayList containing `[" something: " "0" "1" " "]`.
+
+Functions defined with `stringcheese.core/deftemplate` take an implicit first argument which is a java.io.Writer to write the output of the rendered template to. `stringcheese.core/render-string` and `stringcheese.core/render-list` call the function they're passed as first argument with the rest of their arguments, and return the rendered result (as a String or an ArrayList, respectively).
 
 ## License
 
