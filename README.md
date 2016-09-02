@@ -22,7 +22,7 @@ Add the following to your project.clj: `[stringcheese "1"]`
 (cheese/render-string confirmation-email "Jane Doe" (java.util.Date.))
 ```
 
-The template language has two kinds if tag: `{% ... %}` and `%{ ... }%`.
+The template language has two kinds of tag: `{% ... %}` and `%{ ... }%`.
 
 Anything inside `{%` `%}` blocks gets interpreted as a clojure expression, and the results go in the output.
 
